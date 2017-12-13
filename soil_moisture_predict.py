@@ -18,10 +18,10 @@ i=1
 #array to hold the root mean square error values for each epoch
 rmse_50 = []
 index = []
-num_epochs = 30
+num_epochs = 50
 while i<=num_epochs:
     #read data from csv and convert the feature values into float
-    dataset = read_csv('674_exponential_ma.csv', header=0, index_col=0)
+    dataset = read_csv('674/Site674_mice_20inchSMS_nowind.csv', header=0, index_col=0)
     values = dataset.values
     values = values.astype('float32')
     #encode data values and scale or normalize them with in the range of 0 to 1
@@ -44,7 +44,7 @@ while i<=num_epochs:
 
     #LSTM model
     model = Sequential()
-    model.add(LSTM(10, input_shape=(train_X.shape[1], train_X.shape[2])))
+    model.add(LSTM(100, input_shape=(train_X.shape[1], train_X.shape[2])))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
     history = model.fit(train_X, train_y, epochs=i, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=True)
@@ -68,7 +68,7 @@ while i<=num_epochs:
         plt.plot(xrow, inv_y_list, 'b.',label='Actual values')
         plt.legend(loc='lower right', shadow=True, fontsize='x-large')
         plt.xlabel("time steps of 1 hour each")
-        plt.ylabel("Value of PREC.I-1 (in)")
+        plt.ylabel("Value of SMS 20 inch")
         plt.show()
     rmse = sqrt(mean_squared_error(inv_y, inv_yhat))
     print('Test RMSE: %.3f' % round(rmse,2))
