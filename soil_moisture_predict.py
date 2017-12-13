@@ -1,4 +1,7 @@
-#this script is for predicting the soil moisture content at 1 inch using LSTM
+#This code has been developed as part of the class project for predicting the soil moisture content using LSTM
+#CIS 731 Artificial Neural Networks
+#code that has helped to develop this code is from https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/
+
 from math import sqrt
 from numpy import concatenate
 from pandas import read_csv
